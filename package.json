@@ -1,0 +1,23 @@
+{
+  "name": "kmo-token",
+  "version": "1.0.0",
+  "license": "MIT",
+  "homepage": "http://kmo.foundation/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kmo-foundation/contracts"
+  },
+  "devDependencies": {
+    "@openzeppelin/test-helpers": "^0.5.15",
+    "truffle": "^5.4.18",
+    "solidity-coverage": "^0.7.17"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.3.2"
+  },
+  "scripts": {
+    "compile": "truffle compile",
+    "test": "truffle test",
+    "coverage": "truffle run coverage"
+  }
+}
