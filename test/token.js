@@ -13,8 +13,8 @@ contract('WrappedKMO', ([owner, bridge, user]) => {
   it('init check', async () => {
     expect(await token.name()).equals('wKMO');
     expect(await token.symbol()).equals('wKMO');
-    expect((await token.totalSupply()).toString()).equals(web3.utils.toWei('100000000'));
-    expect((await token.balanceOf(owner)).toString()).equals(web3.utils.toWei('100000000'));
+    expect((await token.totalSupply()).toString()).equals(web3.utils.toWei('0'));
+    expect((await token.balanceOf(owner)).toString()).equals(web3.utils.toWei('0'));
     expect((await token.hasRole(Buffer.from('\x01'), owner)));
   });
 
@@ -28,9 +28,9 @@ contract('WrappedKMO', ([owner, bridge, user]) => {
     await expectRevert(token.mint(user, web3.utils.toWei('100'), {from: owner}), 'revert AccessControl');
     await expectRevert(token.mint(user, web3.utils.toWei('100')), 'revert AccessControl');
 
-    token.mint(user, web3.utils.toWei('100'), {from: bridge});
+    await token.mint(user, web3.utils.toWei('100'), {from: bridge});
 
-    expect((await token.totalSupply()).toString()).equals(web3.utils.toWei('100000100'));
+    expect((await token.totalSupply()).toString()).equals(web3.utils.toWei('100'));
     expect((await token.balanceOf(user)).toString()).equals(web3.utils.toWei('100'));
   });
 
@@ -47,7 +47,7 @@ contract('WrappedKMO', ([owner, bridge, user]) => {
     await token.mint(bridge, web3.utils.toWei('100'), {from: bridge});
     await token.burn(web3.utils.toWei('100'), {from: bridge});
 
-    expect((await token.totalSupply()).toString()).equals(web3.utils.toWei('100000000'));
+    expect((await token.totalSupply()).toString()).equals(web3.utils.toWei('0'));
     expect((await token.balanceOf(bridge)).toString()).equals(web3.utils.toWei('0'));
   });
 });
